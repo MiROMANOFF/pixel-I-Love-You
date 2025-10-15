@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+    position: relative; /* Важно для абсолютного позиционирования падающих сердечек */
+    image-rendering: pixelated;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+/* Центральное сердце */
+.heart {
+    width: 150px;
+    height: auto;
+    animation: pulse 1.5s infinite ease-in-out, glow 2s infinite ease-in-out;
+    image-rendering: pixelated;
+}
+
+/* Текст под сердцем */
+.text-image {
+    width: 250px;
+    height: auto;
+    margin-top: 20px;
+    image-rendering: pixelated;
+}
+
+/* Падающие сердечки */
+.falling-heart {
+    position: absolute;
+    top: var(--startY, 0);
+    left: var(--startX, 0);
+    width: 20px;
+    height: 20px;
+    opacity: 0.9;
+    z-index: 1;
+    image-rendering: pixelated;
+    animation: fall-diagonal linear infinite;
+}
+
+/* Анимации */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 8px red); }
+    50% { filter: drop-shadow(0 0 16px red); }
+}
+
+@keyframes fall-diagonal {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(var(--endX) - var(--startX)), calc(var(--endY) - var(--startY))) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .heart { width: 100px; }
+    .text-image { width: 160px; }
+    .falling-heart { width: 14px; height: 14px; }
+}
