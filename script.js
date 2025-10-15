@@ -1,4 +1,4 @@
-const heartCount = 300;
+const heartCount = 150;
 
 for (let i = 0; i < heartCount; i++) {
     const heart = document.createElement("img");
@@ -56,4 +56,5 @@ for (let i = 0; i < heartCount; i++) {
         void heart.offsetWidth; // trigger reflow
         heart.classList.add("falling-heart");
     });
+
 }
